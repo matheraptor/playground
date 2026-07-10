@@ -1,39 +1,50 @@
----
-type: readme
-tags: [readme, batch, script, audioTools]
-author: Matheraptor
-workspace version: 0.39.969 20260710
----
-
-# OGG Audio Converter script {#top}
-
-- [OGG Audio Converter script {#top}](#ogg-audio-converter-script-top)
-  - [Overview](#overview)
-  - [The script](#the-script)
-  - [Research sources](#research-sources)
-
----
-
-## Overview
-
-This Batch script converts audio files (currently only `.wav` and `.mp3`) to `.ogg` format, using [ffmpeg](https://www.ffmpeg.org/).
-
-It is a simple script that I put together from research out of curiosity on [Google](https://www.google.com/) (sources provided below).
-
-The purpose of this script came about out of frustration for having to   rely on web conversion apps to convert my [Guitar pro](http://www.guitar-pro.com/) creations into a format that would be suitable for [RPG Maker MZ](https://www.rpgmakerweb.com/products/rpg-maker-mz).
-
-At some point, I thought, "there has to be a simpler way; afterall, it's all done with 'ffmpeg'[^efefmpeg], right?"
-
-So, that's how I started studying Batch scripting...
-
-I break down each piece of this script below as a learning excercise.
-
----
-
-## The script
-
-```cmd
-:: hide the command text from showing in the console
+<h1>OGG Audio converter script</h1>
+<ul>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#how-to-use">How to Use</a></li>
+  <li><a href="#the-script">The script</a></li>
+  <li><a href="#sources">Sources</a></li>
+</ul>
+<hr>
+<h2 id="overview">Overview</h2>
+<p>
+  This Batch script converts audio files 
+  (currently only <code>.wav</code> and <code>.mp3</code>) 
+  to <code>.ogg</code> format, 
+  using <a href="https://www.ffmpeg.org/">ffmpeg</a>.
+</p>
+<p>
+  It is a simple script that I put together from 
+  research out of curiosity on [Google](https://www.google.com/) 
+  (sources provided below).
+</p>
+<p>
+  The purpose of this script came about out of frustration for having to 
+  rely on web conversion apps to convert my [Guitar pro](http://www.guitar-pro.com/) 
+  creations into a format that would be suitable for 
+  [RPG Maker MZ](https://www.rpgmakerweb.com/products/rpg-maker-mz). 
+  At some point, I thought, "there has to be a simpler way; afterall, it's 
+  all done with 'ffmpeg' 
+  <a href="#efefmpeg" id="ref-efefmpeg" aria-describedby="footnote-label">
+    <sup>[1]</sup>
+  </a>, right?"
+</p>
+<p>
+  So, that's how I started studying Batch scripting...
+</p>
+<p>
+  I break down each piece of this script below as a learning excercise.
+</p>
+<p>
+  <a href="#wrapper" aria-label="Back to top of page">
+    Back to top ⤴️
+  </a>
+</p>
+<hr>
+<h2 id="the-script">The script</h2>
+<pre>
+  <code class="language-batch">
+    :: hide the command text from showing in the console
     :: only outputs and 'echo text' will display
     @echo off
     :: enable delayed variable expansion ('!variable!')
@@ -104,17 +115,43 @@ I break down each piece of this script below as a learning excercise.
     echo Check out more tools and games at:
     echo https://matheraptor.itch.io
     pause
-```
-
-[Back to top ⤴️](#top)
-
----
-
-## Research sources
-
-- [learn.microsoft.com | setlocal](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/setlocal)
-- [learn.microsoft.com | echo](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/echo)
-- [wikibooks.org | Windows Batch Scripting](https://en.wikibooks.org/wiki/Windows_Batch_Scripting)
-- [gaijin.at | Windows Batch Programs](https://www.gaijin.at/en/infos/windows-batch-programs)
-
----
+  </code>
+</pre>
+<p>
+  <a href="https://matheraptor.itch.io/ogg-audio-converter-bat#wrapper" aria-label="Back to top of page">
+    Back to top ⤴️
+  </a>
+</p>
+<hr>
+<h2 id="sources">Sources</h2>
+<p>
+  List of sources I researched for this script.
+</p>
+<ul>
+  <li>
+    <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/setlocal">
+      learn.microsoft.com | setlocal
+    </a>
+  </li>
+  <li>
+    <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/echo">
+      learn.microsoft.com | echo
+    </a>
+  </li>
+  <li>
+    <a href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting">
+      wikibooks.org | Windows Batch scripting
+    </a>
+  </li>
+</ul>
+<hr>
+<div class="footnotes">
+  <h2 id="footnote-label" class="sr-only">Footnotes</h2>
+  <ol>
+    <li id="efefmpeg">
+      I pronounce <code>ffmpeg</code> as "ef-ef-mpeg". 
+      How do you pronounce it?
+      <a href="#ref-efefmpeg" aria-label="Back to content">↩</a>
+    </li>
+  </ol>
+</div>
