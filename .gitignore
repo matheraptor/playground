@@ -11,6 +11,10 @@ eslint.config.js
 
 .vscode/
 
+# utilities
+utilities/kml_conver/repo/
+utilities/kml_conver/tmp/
+
 # admin 
 .admin/
 scratchpad.js
