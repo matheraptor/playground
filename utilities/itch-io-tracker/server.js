@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const version = "0.2.0 2026 07 14";
 
 // Paste your Discord URL inside the quotes below
 const DISCORD_WEBHOOK_URL = process.env.WEBHOOK_URL;
@@ -77,4 +78,4 @@ setInterval(() => {
   }).catch((err) => console.error("Discord Webhook Error:", err));
 }, 5000); // 5000 milliseconds = 5 seconds
 
-app.listen(PORT, () => console.log(`Itch.io tracker online.`));
+app.listen(PORT, () => console.log(`Itch.io tracker online.\nv${version}`));
