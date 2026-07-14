@@ -1,7 +1,12 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const version = "0.2.0 2026 07 14";
+/**
+ * @desc changelog
+ * @version 0.2.1
+ * - TWEAKED: logMessage formatting (one line per stat)
+ */
+const version = "0.2.1 2026 07 14";
 
 // Paste your Discord URL inside the quotes below
 const DISCORD_WEBHOOK_URL = process.env.WEBHOOK_URL;
@@ -49,7 +54,8 @@ app.get("/track.gif", (req, res) => {
     }
   }
   // Push this individual hit directly into memory
-  logQueue.push(`📄 \`${pageID}\` | ⏰ \`${timestamp}\`\n🤖 **${clientType}**`);
+  const logMessage = `📄 \`${pageID}\`\n⏰ \`${timestamp}\`\n**${clientType}**`;
+  logQueue.push(logMessage);
   // Serve the invisible image back to itch.io immediately
   res.writeHead(200, {
     "Content-Type": "image/gif",
