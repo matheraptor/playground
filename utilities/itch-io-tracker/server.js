@@ -17,12 +17,38 @@ let logQueue = [];
 // The tracking route that itch.io will trigger
 app.get("/track.gif", (req, res) => {
   const timestamp = new Date().toISOString();
-  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-  const userAgent = req.headers["user-agent"] || "Unknown";
-
+  //EXTRACT THE PAGE ID FROM THE URL QUERY
+  //if the link is just /track.gif, it falls back to 'Unknown Page'
+  const pageID = req.query.id || "Unknown Page";
+  //USER-AGENT EVALUATION
+  const rawAgent = req.headers["user-agent"] || "Unknown";
+  const lowerAgent = rawAgent.toLocaleLowerCase();
+  const clientType_Human = "🌐 Human";
+  const clientType_Bot = "🤖 Bot / Scraper";
+  let clientType = clientType_Human;
+  if (rawAgent === "Unknown" || rawAgent.trim() === "") {
+    clientType = "❓ Unknown";
+  } else {
+    const known_bot_libraries = [
+      "bot",
+      "crawler",
+      "spider",
+      "python",
+      "curl",
+      "wget",
+      "go-http-client",
+      "axios",
+      "headless",
+    ];
+    for (const botLib of known_bot_libraries) {
+      if (lowerAgent.includes(botLib)) {
+        clientType = clientType_Bot;
+        break;
+      }
+    }
+  }
   // Push this individual hit directly into memory
-  logQueue.push(`⏰ \`${timestamp}\` | 🌐 \`${ip}\` | 🤖 \`${userAgent}\``);
-
+  logQueue.push(`📄 \`${pageID}\` | ⏰ \`${timestamp}\`\n🤖 **${clientType}**`);
   // Serve the invisible image back to itch.io immediately
   res.writeHead(200, {
     "Content-Type": "image/gif",
