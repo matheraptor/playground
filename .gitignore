@@ -12,8 +12,8 @@ eslint.config.js
 .vscode/
 
 # utilities
-utilities/kml_conver/repo/
-utilities/kml_conver/tmp/
+utilities/kml_converter/repo/
+utilities/kml_converter/tmp/
 
 # admin 
 .admin/
