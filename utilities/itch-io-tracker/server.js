@@ -3,10 +3,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 /**
  * @desc changelog
- * @version 0.2.1
+ * @version 0.2.2
  * - TWEAKED: logMessage formatting (one line per stat)
  */
-const version = "0.2.1 2026 07 14";
+const version = "0.2.2 2026 07 15";
 
 // Paste your Discord URL inside the quotes below
 const DISCORD_WEBHOOK_URL = process.env.WEBHOOK_URL;
@@ -19,9 +19,19 @@ const pixelBuffer = Buffer.from(
 
 // This array holds incoming traffic rows in memory temporarily
 let logQueue = [];
-
+// Pinger endpoint
+app.get("/", (req, res) => {
+  res.send("OK");
+});
 // The tracking route that itch.io will trigger
 app.get("/track.gif", (req, res) => {
+  try {
+    main(req, res);
+  } catch (e) {
+    console.error(e);
+  }
+});
+function main(req, res) {
   const timestamp = new Date().toISOString();
   //EXTRACT THE PAGE ID FROM THE URL QUERY
   //if the link is just /track.gif, it falls back to 'Unknown Page'
@@ -63,8 +73,7 @@ app.get("/track.gif", (req, res) => {
     "Cache-Control": "no-store, must-revalidate",
   });
   res.end(pixelBuffer);
-});
-
+}
 // A background loop that flushes the memory queue to Discord every 5 seconds
 setInterval(() => {
   if (logQueue.length === 0) return; // Do nothing if there is no traffic
