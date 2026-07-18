@@ -1,6 +1,6 @@
 {
-  "name": "feedback-poster",
-  "version": "1.0.0",
+  "name": "magpie-helper",
+  "version": "0.3.1",
   "main": "server.js",
   "scripts": {
     "start": "node --env-file=.env server.js"

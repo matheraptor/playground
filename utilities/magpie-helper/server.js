@@ -1,12 +1,14 @@
 /**
  * @desc changelog
+ * @version 0.3.1
+ * - FIXED: package.json name
  * @version 0.3.0
  * - ADDED: consolidation of feedback-poster and itch-io-tracker
  * @version 0.1.1
  * - ADDED: get("/ping")
  * @version 0.1.0
  */
-const version = "0.3.0 2026 07 18";
+const version = "0.3.1 2026 07 18";
 const express = require("express");
 const cors = require("cors");
 const app = express();
