@@ -1,0 +1,11 @@
+POST https://feedback-poster.onrender.com/webhook
+Content-Type: application/json
+
+{
+  "pluginName": "test",
+  "feedback": [
+    "test entry: 1",
+    "test entry: 2",
+    "test entry: 3"
+  ]
+}

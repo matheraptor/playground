@@ -1,9 +1,10 @@
 /**
  * @desc changelog
+ * @version 0.1.1
+ * - ADDED: get("/ping")
  * @version 0.1.0
- *
  */
-const version = "0.1.0 2026 07 18";
+const version = "0.1.1 2026 07 18";
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -18,6 +19,9 @@ app.use(
   }),
 );
 app.use(express.json());
+app.get("/ping", (req, res) => {
+  res.status(200).send(ePrefix + "pong!");
+});
 app.post("/webhook", async (req, res) => {
   try {
     const data = req.body;
