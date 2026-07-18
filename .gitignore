@@ -8,6 +8,7 @@ ssh-key.*
 jsconfig.json
 eslint.config.js
 .prettierignore
+*post.http
 
 .vscode/
 
