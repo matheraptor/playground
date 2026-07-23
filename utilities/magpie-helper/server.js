@@ -1,7 +1,7 @@
 /**
  * @desc changelog
- * @version 0.3.3
- * - TWEAKED: removed cors bloat
+ * @version 0.3.4
+ * - FIXED: pong
  * @version 0.3.1
  * - FIXED: package.json name
  * @version 0.3.0
@@ -27,13 +27,7 @@ const ePrefix = "[RENDER-HELPER]: ";
 //------------------------------------------------------------------------
 // #region > express
 //------------------------------------------------------------------------
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  if (req.method === "OPTIONS") return res.sendStatus(200);
-  next();
-});
+app.use(cors());
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("OK");
@@ -48,7 +42,7 @@ app.get(TRACKER_WEBHOOK, (req, res) => {
 });
 
 app.get("/ping", (req, res) => {
-  res.status(200).send(ePrefix + "pong!");
+  res.status(204).send();
 });
 app.post(FEEDBACK_WEBHOOK, async (req, res) => {
   sendFeedback(req, res);
