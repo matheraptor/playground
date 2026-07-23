@@ -1,6 +1,6 @@
 /**
  * @desc changelog
- * @version 0.3.2
+ * @version 0.3.3
  * - TWEAKED: removed cors bloat
  * @version 0.3.1
  * - FIXED: package.json name
@@ -10,7 +10,7 @@
  * - ADDED: get("/ping")
  * @version 0.1.0
  */
-const version = "0.3.1 2026 07 18";
+const version = "0.3.3 2026 07 23";
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +27,13 @@ const ePrefix = "[RENDER-HELPER]: ";
 //------------------------------------------------------------------------
 // #region > express
 //------------------------------------------------------------------------
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") return res.sendStatus(200);
+  next();
+});
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("OK");
