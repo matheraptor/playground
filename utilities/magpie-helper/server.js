@@ -1,5 +1,7 @@
 /**
  * @desc changelog
+ * @version 0.3.2
+ * - TWEAKED: removed cors bloat
  * @version 0.3.1
  * - FIXED: package.json name
  * @version 0.3.0
@@ -10,10 +12,8 @@
  */
 const version = "0.3.1 2026 07 18";
 const express = require("express");
-const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const url = process.env.url;
 const FEEDBACK_WEBHOOK = "/feedback";
 const FEEDBACK_WEBHOOK_URL = process.env.FEEDBACK_WEBHOOK_URL;
 const TRACKER_WEBHOOK = "/track.gif";
@@ -27,11 +27,6 @@ const ePrefix = "[RENDER-HELPER]: ";
 //------------------------------------------------------------------------
 // #region > express
 //------------------------------------------------------------------------
-app.use(
-  cors({
-    origin: "*",
-  }),
-);
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("OK");
@@ -122,19 +117,21 @@ setInterval(() => {
 
   // Take up to 15 entries out of the queue to keep the message under Discord's character limit
   const batchToSend = logQueue.splice(0, 15);
-
   const messageContent =
     `🚨 **Batch Traffic Report (${batchToSend.length} hits logged):**\n` +
     batchToSend.join("\n") +
     `\n───────────────────`;
-
   fetch(TRACKER_WEBHOOK_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content: messageContent }),
-  }).catch((err) => console.error("Discord Webhook Error:", err));
+  })
+    .then((res) =>
+      res.ok ? null : console.error(`Webhook HTTP Error: ${res.status}`),
+    )
+    .catch((err) => console.error("Webhook network error:", err));
 }, 5000); // 5000 milliseconds = 5 seconds
-
+//
 // #endregion
 //------------------------------------------------------------------------
 /**
