@@ -1,6 +1,6 @@
 /**
  * @desc changelog
- * @version 0.3.5
+ * @version 0.3.6
  * - FIXED: pong
  * @version 0.3.1
  * - FIXED: package.json name
@@ -10,7 +10,7 @@
  * - ADDED: get("/ping")
  * @version 0.1.0
  */
-const version = "0.3.5 2026 07 23";
+const version = "0.3.6 2026 07 23";
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -71,6 +71,7 @@ let logQueue = [];
 // Pinger endpoint
 
 function track(req, res) {
+  console.log(`${ePrefix}Hit detected for ID: ${req.query.id || "unknown"}`);
   const timestamp = new Date().toISOString();
   //EXTRACT THE PAGE ID FROM THE URL QUERY
   //if the link is just /track.gif, it falls back to 'Unknown Page'
@@ -109,7 +110,10 @@ function track(req, res) {
   res.writeHead(200, {
     "Content-Type": "image/gif",
     "Content-Length": pixelBuffer.length,
-    "Cache-Control": "no-store, must-revalidate",
+    "Cache-Control":
+      "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+    Pragma: "no-cache",
+    Expires: "0",
   });
   res.end(pixelBuffer);
 }
@@ -129,7 +133,9 @@ setInterval(() => {
     body: JSON.stringify({ content: messageContent }),
   })
     .then((res) =>
-      res.ok ? null : console.error(`Webhook HTTP Error: ${res.status}`),
+      res.ok
+        ? console.log(ePrefix + "tracker visit logged")
+        : console.error(`Webhook HTTP Error: ${res.status}`),
     )
     .catch((err) => console.error("Webhook network error:", err));
 }, 5000); // 5000 milliseconds = 5 seconds
