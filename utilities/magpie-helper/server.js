@@ -1,6 +1,6 @@
 /**
  * @desc changelog
- * @version 0.3.4
+ * @version 0.3.5
  * - FIXED: pong
  * @version 0.3.1
  * - FIXED: package.json name
@@ -10,8 +10,9 @@
  * - ADDED: get("/ping")
  * @version 0.1.0
  */
-const version = "0.3.3 2026 07 23";
+const version = "0.3.5 2026 07 23";
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const FEEDBACK_WEBHOOK = "/feedback";
